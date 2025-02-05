@@ -19,7 +19,7 @@ override DEPDIR := $(addprefix $(BUILDDIR), deps/)
 override BONUSDEPDIR := $(addprefix bonus/, $(DEPDIR))
 
 BASENAME := main parsing parsing_utils get_next_line_utils get_next_line \
-			memory_utils rendering window_management hook
+			memory_utils rendering mlx_utils hook
 
 BONUSBASENAME := main parsing pipex error_utils fcntl_utils memory_utils \
 				 get_next_line get_next_line_utils heredoc
@@ -48,7 +48,7 @@ override LDLIBS := -L libft/ -L$(MLXDIR)
 
 CC := cc
 
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra
 
 CPPFLAGS := -Iincludes -Ilibft/includes -I$(MLXDIR)
 
@@ -67,10 +67,10 @@ all:
 	@$(MAKE) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
-	$(CC) $(CLAGS) $(CPPFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o $(NAME) -g3
+	$(CC) $(CLAGS) $(CPPFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o $(NAME) -O3
 
 $(OBJDIR)%.o: $(SRCDIR)%.c | $(BUILDDIR) $(OBJDIR) $(DEPDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPSFLAGS) $(DEPDIR)$*.d -c $< -o $@ -g3
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPSFLAGS) $(DEPDIR)$*.d -c $< -o $@ -O3
 
 $(LIBFT): force
 	@$(MAKE) -C libft/

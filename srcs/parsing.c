@@ -89,6 +89,8 @@ static int	fill_line(t_point *map_line, char *line, size_t line_nb)
 			map_line[i].color.rgba = ft_strtol(ptr2 + 1, &ptr1, 16);
 		else
 			map_line[i].color.rgba = 0xFFFFFF;
+		while (ft_isspace(*ptr1))
+			++ptr1;
 		++i;
 	}
 	return (0);

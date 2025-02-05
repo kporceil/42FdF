@@ -46,7 +46,6 @@ t_err				lst_add(int fd, t_buffer **lst);
 bool				is_line_complete(t_buffer *buffer);
 void				*lst_clear(t_buffer **lst);
 ssize_t				ft_calc_len(t_buffer *lst);
-
-char				*get_next_line(int fd, t_gnlmode);
+char				*get_next_line(int fd, t_gnlmode mode);
 
 #endif

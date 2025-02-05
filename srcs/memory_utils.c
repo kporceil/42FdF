@@ -22,9 +22,10 @@ void	free_points(t_data *map_data)
 	i = 0;
 	while (i < map_data->line)
 	{
-		free(map_data->map[i++]);
+		free(map_data->map[i]);
 		if (map_data->rendered_point)
 			free(map_data->rendered_point[i]);
+		++i;
 	}
 	if (map_data->rendered_point)
 		free(map_data->rendered_point);

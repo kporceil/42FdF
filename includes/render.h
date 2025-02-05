@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:12:59 by kporceil          #+#    #+#             */
-/*   Updated: 2025/01/27 19:53:26 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/02/05 17:29:15 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 #  define WINDOW_HEIGHT 1080
 # endif
 
-int		rendering_map(t_data *map_data);
-void	apply_translation(t_data *map_data, int dx, int dy, int dz);
-int		create_window_and_render(t_data *map_data);
-void	apply_zoom(t_data *map_data, float scale);
+void	apply_translation(t_data *map_data);
+int		init_mlx(t_mlx *mlx, t_data *map_data);
+void	display_map(t_mlx *mlx);
 void	render_points_to_image(t_mlx *mlx);
-void	isometric_projection(t_data *map_data);
+void	change_z(t_data *map_data, int factor);
+void	render_map(t_data *map_data);
 
 #endif
