@@ -19,6 +19,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <stdlib.h>
+#include <limits.h>
 
 static int	set_map_line_col(char *file, t_data *map_data)
 {

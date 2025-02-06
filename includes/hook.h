@@ -15,7 +15,7 @@
 
 # include "map.h"
 
-void	handle_destroy(t_mlx *mlx);
-void	handle_key(int keycode, t_mlx *mlx);
+int	handle_destroy(t_mlx *mlx);
+int	handle_key(int keycode, t_mlx *mlx);
 
 #endif

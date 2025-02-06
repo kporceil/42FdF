@@ -81,8 +81,10 @@ override RM := rm -rf
 
 override MAKEFLAGS += --no-print-directory
 
+COMPFLAGS :=
+
 all:
-	@$(MAKE) $(NAME)
+	@$(MAKE) COMPFLAGS="$(COMPFLAGS)" $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
@@ -90,7 +92,7 @@ $(NAME): $(OBJS)
 	@echo "libft.a created."
 
 $(OBJDIR)%.o: $(SRCDIR)%.c | $(OBJDIR) $(DEPDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCS) $(DEPSFLAGS) $(DEPDIR)$*.d -c $< -o $@ -g3
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCS) $(DEPSFLAGS) $(DEPDIR)$*.d -c $< -o $@ ${COMPFLAGS}
 
 $(OBJDIR) $(DEPDIR):
 	mkdir -p $@

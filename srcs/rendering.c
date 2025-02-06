@@ -35,27 +35,28 @@ void	apply_translation(t_data *map_data)
 	}
 }
 
-void	apply_projection(t_data *map_data)
+void	apply_projection(t_data *map)
 {
 	size_t		i;
 	size_t		j;
-	const float	angle = M_PI / 6;
+	int			x;
+	int			z;
+	int			y;
 
 	i = 0;
-	while (i < map_data->line)
+	while (i < map->line)
 	{
 		j = 0;
-		while (j < map_data->col)
+		while (j < map->col)
 		{
-			map_data->rendered_point[i][j].z = 0;
-			map_data->rendered_point[i][j].color.rgba
-				= map_data->map[i][j].color.rgba;
-			map_data->rendered_point[i][j].x = (map_data->map[i][j].x
-					* map_data->scale - map_data->map[i][j].y * map_data->scale)
-				* cos(angle);
-			map_data->rendered_point[i][j].y = (map_data->map[i][j].x
-					* map_data->scale + map_data->map[i][j].y * map_data->scale)
-				* sin(angle) - (map_data->map[i][j].z * map_data->z_factor);
+			y = (sin(map->rotate) * map->map[i][j].x + cos(map->rotate)
+					* map->map[i][j].y) * map->scale;
+			x = (cos(map->rotate) * map->map[i][j].x - sin(map->rotate)
+					* map->map[i][j].y) * map->scale;
+			z = map->map[i][j].z * map->z_factor * map->scale;
+			map->rendered_point[i][j].color.rgba = map->map[i][j].color.rgba;
+			map->rendered_point[i][j].x = (x - y) * cos(map->angle);
+			map->rendered_point[i][j].y = (x + y) * sin(map->angle) - z;
 			++j;
 		}
 		++i;

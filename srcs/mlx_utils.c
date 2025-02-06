@@ -29,11 +29,11 @@ static void	put_pixel_to_image(t_image *image, int x, int y, int color)
 	}
 }
 
-static void	draw_line(t_image *image, t_point p1, t_point p2)
+static void	draw_line(t_image *image, t_point p, t_point p2)
 {
-	const int	d[2] = {abs(p2.x - p1.x), abs(p2.y - p1.y)};
-	const int	s[2] = {((p1.x < p2.x) + (p1.x < p2.x) - 1),
-		((p1.y < p2.y) + (p1.y < p2.y) - 1)};
+	const int	d[2] = {abs(p2.x - p.x), abs(p2.y - p.y)};
+	const int	s[2] = {((p.x < p2.x) + (p.x < p2.x) - 1),
+		((p.y < p2.y) + (p.y < p2.y) - 1)};
 	int			err[2];
 
 	err[0] = -d[1] / 2;
@@ -41,19 +41,19 @@ static void	draw_line(t_image *image, t_point p1, t_point p2)
 		err[0] = d[0] / 2;
 	while (1)
 	{
-		put_pixel_to_image(image, p1.x, p1.y, p1.color.rgba);
-		if (p1.x == p2.x && p1.y == p2.y)
+		put_pixel_to_image(image, p.x, p.y, p.color.rgba);
+		if (p.x == p2.x && p.y == p2.y)
 			break ;
 		err[1] = err[0];
 		if (err[1] > -d[0])
 		{
 			err[0] -= d[1];
-			p1.x += s[0];
+			p.x += s[0];
 		}
 		if (err[1] < d[1])
 		{
 			err[0] += d[0];
-			p1.y += s[1];
+			p.y += s[1];
 		}
 	}
 }
@@ -72,10 +72,12 @@ void	render_points_to_image(t_mlx *mlx)
 		while (j < mlx->map_data->col)
 		{
 			p1 = mlx->map_data->rendered_point[i] + j;
-			p2 = mlx->map_data->rendered_point[i] + (j + 1);
+			if (j + 1 < mlx->map_data->col)
+				p2 = mlx->map_data->rendered_point[i] + (j + 1);
 			if (j + 1 < mlx->map_data->col)
 				draw_line(&mlx->image, *p1, *p2);
-			p2 = mlx->map_data->rendered_point[i + 1] + j;
+			if (i + 1 < mlx->map_data->line)
+				p2 = mlx->map_data->rendered_point[i + 1] + j;
 			if (i + 1 < mlx->map_data->line)
 				draw_line(&mlx->image, *p1, *p2);
 			++j;
@@ -95,6 +97,10 @@ void	display_map(t_mlx *mlx)
 
 int	init_mlx(t_mlx *mlx, t_data *map_data)
 {
+	mlx->mlx_ptr = NULL;
+	mlx->win_ptr = NULL;
+	mlx->image.img_ptr = NULL;
+	mlx->image.data = NULL;
 	mlx->map_data = map_data;
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
@@ -103,8 +109,8 @@ int	init_mlx(t_mlx *mlx, t_data *map_data)
 			"kporceil's FdF");
 	if (!mlx->win_ptr)
 		return (-1);
-	mlx->image.img_ptr = mlx_new_image(mlx->mlx_ptr,
-			WINDOW_WIDTH, WINDOW_HEIGHT);
+	mlx->image.img_ptr = mlx_new_image(mlx->mlx_ptr, WINDOW_WIDTH,
+			WINDOW_HEIGHT);
 	if (!mlx->image.img_ptr)
 		return (-1);
 	mlx->image.data = mlx_get_data_addr(mlx->image.img_ptr, &mlx->image.bpp,

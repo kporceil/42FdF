@@ -56,6 +56,8 @@ DEPSFLAGS := -MD -MP -MF
 
 LIBFLAGS := -lft
 
+COMPFLAGS :=
+
 MAKEFLAGS += --no-print-directory
 
 .DEFAULT_GOAL = all
@@ -63,17 +65,17 @@ MAKEFLAGS += --no-print-directory
 -include $(DEPS)
 
 .PHONY: all
-all: 
-	@$(MAKE) $(NAME)
+all:
+	@$(MAKE) COMPFLAGS="$(COMPFLAGS)" $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
-	$(CC) $(CLAGS) $(CPPFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o $(NAME) -O3
+	$(CC) $(CLAGS) $(CPPFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o $(NAME) $(COMPFLAGS)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c | $(BUILDDIR) $(OBJDIR) $(DEPDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPSFLAGS) $(DEPDIR)$*.d -c $< -o $@ -O3
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPSFLAGS) $(DEPDIR)$*.d -c $< -o $@ $(COMPFLAGS)
 
 $(LIBFT): force
-	@$(MAKE) -C libft/
+	@$(MAKE) COMPFLAGS="$(COMPFLAGS)" -C libft/
 
 $(MLX): force
 	@$(MAKE) -C $(MLXDIR)
