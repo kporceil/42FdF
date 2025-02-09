@@ -6,12 +6,10 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:03:47 by kporceil          #+#    #+#             */
-/*   Updated: 2025/02/05 17:43:27 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/02/09 15:33:47 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memory.h"
-#include "mlx.h"
 #include "render.h"
 #include "map.h"
 #include <math.h>
@@ -49,14 +47,15 @@ void	apply_projection(t_data *map)
 		j = 0;
 		while (j < map->col)
 		{
-			y = (sin(map->rotate) * map->map[i][j].x + cos(map->rotate)
-					* map->map[i][j].y) * map->scale;
-			x = (cos(map->rotate) * map->map[i][j].x - sin(map->rotate)
-					* map->map[i][j].y) * map->scale;
-			z = map->map[i][j].z * map->z_factor * map->scale;
+			x = map->map[i][j].x;
+			z = map->map[i][j].z;
+			y = map->map[i][j].y;
+			rotate_x(&x, &y, &z, map);
+			rotate_y(&x, &z, map);
+			rotate_z(&x, &y, map);
+			map->rendered_point[i][j].x = x;
+			map->rendered_point[i][j].y = y;
 			map->rendered_point[i][j].color.rgba = map->map[i][j].color.rgba;
-			map->rendered_point[i][j].x = (x - y) * cos(map->angle);
-			map->rendered_point[i][j].y = (x + y) * sin(map->angle) - z;
 			++j;
 		}
 		++i;

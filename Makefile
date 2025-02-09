@@ -19,7 +19,7 @@ override DEPDIR := $(addprefix $(BUILDDIR), deps/)
 override BONUSDEPDIR := $(addprefix bonus/, $(DEPDIR))
 
 BASENAME := main parsing parsing_utils get_next_line_utils get_next_line \
-			memory_utils rendering mlx_utils hook
+			memory_utils rendering mlx_utils hook rotation
 
 BONUSBASENAME := main parsing pipex error_utils fcntl_utils memory_utils \
 				 get_next_line get_next_line_utils heredoc
@@ -38,7 +38,7 @@ override BONUSDEPS := $(addprefix $(BONUSDEPDIR), $(addsuffix .d, $(BONUSBASENAM
 
 MLXDIR := minilibx-linux/
 
-MLX := $(addsuffix libmlx, $(MLXDIR))
+MLX := $(addsuffix libmlx.a, $(MLXDIR))
 
 override LIBFT := libft/libft.a
 

@@ -119,5 +119,6 @@ int	init_mlx(t_mlx *mlx, t_data *map_data)
 		return (-1);
 	mlx_hook(mlx->win_ptr, KeyPress, KeyPressMask, handle_key, mlx);
 	mlx_hook(mlx->win_ptr, DestroyNotify, 0, handle_destroy, mlx);
+	mlx_hook(mlx->win_ptr, ButtonPress, ButtonPressMask, handle_mouse, mlx);
 	return (0);
 }

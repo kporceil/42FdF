@@ -17,5 +17,6 @@
 
 int	handle_destroy(t_mlx *mlx);
 int	handle_key(int keycode, t_mlx *mlx);
+int	handle_mouse(int button, int x, int y, t_mlx *mlx);
 
 #endif

@@ -50,12 +50,13 @@ float	set_scale(t_data *map_data)
 int	init_data(t_data *map_data)
 {
 	map_data->z_factor = 1;
-	map_data->x_center = (WINDOW_WIDTH >> 1);
-	map_data->y_center = (WINDOW_HEIGHT >> 1);
+	map_data->x_center = (WINDOW_WIDTH >> 1) - (map_data->col >> 1);
+	map_data->y_center = (WINDOW_HEIGHT >> 1) - (map_data->line >> 1);
 	map_data->scale = set_scale(map_data);
 	map_data->rendered_point = NULL;
-	map_data->angle = M_PI / 6;
-	map_data->rotate = 0.22;
+	map_data->r_z = 0.22;
+	map_data->r_x = M_PI / 4;
+	map_data->r_y = atan(sin(M_PI / 6));
 	if (duplicate_map(map_data) != 0)
 		return (-1);
 	return (0);

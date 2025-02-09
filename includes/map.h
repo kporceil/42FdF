@@ -41,7 +41,9 @@ typedef struct s_data
 	t_point	**map;
 	t_point	**rendered_point;
 	float	angle;
-	float	rotate;
+	float	r_z;
+	float	r_x;
+	float	r_y;
 	float	scale;
 	float	z_factor;
 	int		y_center;
