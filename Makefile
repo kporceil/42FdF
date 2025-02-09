@@ -21,8 +21,8 @@ override BONUSDEPDIR := $(addprefix bonus/, $(DEPDIR))
 BASENAME := main parsing parsing_utils get_next_line_utils get_next_line \
 			memory_utils rendering mlx_utils hook rotation
 
-BONUSBASENAME := main parsing pipex error_utils fcntl_utils memory_utils \
-				 get_next_line get_next_line_utils heredoc
+BONUSBASENAME := main parsing parsing_utils get_next_line_utils get_next_line \
+			memory_utils rendering mlx_utils hook rotation
 
 override SRCS := $(addprefix $(SRCDIR), $(addsuffix .c, $(BASENAME)))
 
@@ -89,11 +89,11 @@ force:
 bonus:
 	@$(MAKE) $(BONUSNAME) INCS="bonus/$(INCS)"
 
-$(BONUSNAME): $(BONUSOBJS) $(LIBFT)
-	$(CC) $(CLAGS) $(CPPFLAGS) $(BONUSOBJS) $(LDLIBS) $(LDFLAGS) -o $(BONUSNAME) -g3
+$(BONUSNAME): $(BONUSOBJS) $(LIBFT) $(MLX)
+	$(CC) $(CLAGS) $(CPPFLAGS) $(BONUSOBJS) $(LDLIBS) $(LDFLAGS) -o $(BONUSNAME) $(COMPFLAGS)
 
 $(BONUSOBJDIR)%.o: $(BONUSSRCDIR)%.c | $(BONUSBUILDDIR) $(BONUSOBJDIR) $(BONUSDEPDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPSFLAGS) $(BONUSDEPDIR)$*.d -c $< -o $@ -g3
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPSFLAGS) $(BONUSDEPDIR)$*.d -c $< -o $@ $(COMPFLAGS)
 
 $(BUILDDIR) $(OBJDIR) $(DEPDIR) $(BONUSBUILDDIR) $(BONUSDEPDIR) $(BONUSOBJDIR):
 	mkdir -p $@
