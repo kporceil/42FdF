@@ -48,7 +48,7 @@ override LDLIBS := -L libft/ -L$(MLXDIR)
 
 CC := cc
 
-CFLAGS := -Wall -Wextra
+CFLAGS := -Wall -Wextra -Werror
 
 CPPFLAGS := -Iincludes -Ilibft/includes -I$(MLXDIR)
 
