@@ -12,6 +12,7 @@
 
 #include "get_next_line.h"
 #include <stdbool.h>
+#include <stdlib.h>
 
 t_err		join_lst(t_buffer **lst, char **line);
 t_buffer	*set_leftover(t_buffer *node);

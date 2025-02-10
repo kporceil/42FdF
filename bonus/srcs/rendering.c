@@ -12,7 +12,6 @@
 
 #include "render.h"
 #include "map.h"
-#include <math.h>
 #include <stddef.h>
 
 void	apply_translation(t_data *map_data)

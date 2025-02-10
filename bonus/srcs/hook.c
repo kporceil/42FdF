@@ -25,17 +25,17 @@ int	handle_destroy(t_mlx *mlx)
 
 int	handle_key2(int keycode, t_mlx *mlx)
 {
-	if (keycode == XK_q)
+	if (keycode == XK_e)
 		mlx->map_data->r_z += 0.1;
-	else if (keycode == XK_e)
+	else if (keycode == XK_q)
 		mlx->map_data->r_z -= 0.1;
 	else if (keycode == XK_w)
 		mlx->map_data->r_x += 0.1;
 	else if (keycode == XK_s)
 		mlx->map_data->r_x -= 0.1;
-	else if (keycode == XK_d)
-		mlx->map_data->r_y -= 0.1;
 	else if (keycode == XK_a)
+		mlx->map_data->r_y -= 0.1;
+	else if (keycode == XK_d)
 		mlx->map_data->r_y += 0.1;
 	else
 		return (1);
@@ -57,9 +57,9 @@ int	handle_key(int keycode, t_mlx *mlx)
 		mlx->map_data->y_center += 3;
 	else if (keycode == XK_Up)
 		mlx->map_data->y_center -= 3;
-	else if (keycode == XK_Right)
-		mlx->map_data->x_center -= 3;
 	else if (keycode == XK_Left)
+		mlx->map_data->x_center -= 3;
+	else if (keycode == XK_Right)
 		mlx->map_data->x_center += 3;
 	else
 		if (handle_key2(keycode, mlx) == 1)

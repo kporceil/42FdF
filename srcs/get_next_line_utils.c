@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdlib.h>
 
 t_err	lst_add(int fd, t_buffer **lst)
 {

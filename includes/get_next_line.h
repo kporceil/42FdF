@@ -15,7 +15,6 @@
 
 # include <stdbool.h>
 # include <stddef.h>
-# include <stdlib.h>
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
